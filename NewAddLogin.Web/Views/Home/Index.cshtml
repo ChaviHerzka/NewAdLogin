@@ -1,0 +1,29 @@
+﻿@using NewAddLogin.Data;
+@model HomePageViewModel
+
+<div class="container">
+    <main role="main" class="pb-3" style="margin-top: 70px"></main>
+</div>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        @foreach (var ad in Model.Ads)
+        {
+            <div class="jumbotron">
+                <h5>Listed by @ad.Name</h5>
+                <h5>Listed on @ad.Date.ToLongDateString()</h5>
+                <h5>Phone Number: @ad.PhoneNumber</h5>
+                <h3>Details:</h3>
+                <p>@ad.Description</p>
+           
+            @if (Model.UserId == ad.UserId)
+            {
+                <form method="post" action="/home/delete">
+                    <input type="hidden" name="adId" value="@ad.Id" />
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            }
+             </div>
+        }
+
+    </div>
+</div>
